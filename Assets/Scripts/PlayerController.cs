@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    private int chachfoxs = 0;
+
     [Header("スピード調整")]
     [SerializeField] private float spead = 5;
 
@@ -41,7 +43,7 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(moveForceMultiplier * (subtractmove));
     }
 
-    void PlayerMove()
+    private void PlayerMove()
     {
         float x = 0, y = 0, z = 0;
         x = Input.GetAxis("Horizontal") * angleSpead;
@@ -62,5 +64,19 @@ public class PlayerController : MonoBehaviour
         move = transform.TransformDirection(move);
         subtractmove = new Vector3(move.x - rb.velocity.x, 0f, move.z - rb.velocity.z);
         transform.Rotate(0, x, 0);
+    }
+
+    public int GetChachFox()
+    {
+        return chachfoxs;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("findingObj"))
+        {
+            other.GetComponent<EnemyController>().CatchFox();
+            chachfoxs++;
+        }
     }
 }

@@ -18,7 +18,6 @@ public class ChinemaSceneController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Attattayo");
         if (!other.gameObject.CompareTag("Player"))
         {
             overhead.Priority = max_value;
