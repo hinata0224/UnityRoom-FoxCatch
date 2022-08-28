@@ -23,6 +23,7 @@ public class EnemyController : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        reactiveProperty.Value = false;
     }
     void Start()
     {
@@ -53,7 +54,6 @@ public class EnemyController : MonoBehaviour
                 animator.SetBool("Run", false);
                 break;
             case "Jump":
-                chach = true;
                 agent.isStopped = true;
                 animator.SetTrigger("Jump");
                 break;
@@ -79,6 +79,15 @@ public class EnemyController : MonoBehaviour
 
     public void CatchFox()
     {
-        animationivent.OnNext("Jump");
+        if (!chach)
+        {
+            animationivent.OnNext("Jump");
+            chach = true;
+        }
+    }
+
+    public bool GetChach()
+    {
+        return chach;
     }
 }

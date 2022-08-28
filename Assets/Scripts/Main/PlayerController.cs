@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerMove()
     {
-        float x = 0, y = 0, z = 0;
+        float x = 0, z = 0;
         x = Input.GetAxis("Horizontal") * angleSpead;
         z = Input.GetAxis("Vertical");
 
@@ -75,8 +75,11 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("findingObj"))
         {
+            if (!other.GetComponent<EnemyController>().GetChach())
+            {
+                chachfoxs++;
+            }
             other.GetComponent<EnemyController>().CatchFox();
-            chachfoxs++;
         }
     }
 }
